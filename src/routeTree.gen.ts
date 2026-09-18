@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivityRouteImport } from './routes/activity'
+import { Route as DriveRouteImport } from './routes/drive'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActivityRoute = ActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DriveRoute = DriveRouteImport.update({
+  id: '/drive',
+  path: '/drive',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/drive': typeof DriveRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/drive': typeof DriveRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/drive': typeof DriveRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/activity' | '/drive'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/activity' | '/drive'
+  id: '__root__' | '/' | '/activity' | '/drive'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityRoute: typeof ActivityRoute
+  DriveRoute: typeof DriveRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activity': {
+      id: '/activity'
+      path: '/activity'
+      fullPath: '/activity'
+      preLoaderRoute: typeof ActivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/drive': {
+      id: '/drive'
+      path: '/drive'
+      fullPath: '/drive'
+      preLoaderRoute: typeof DriveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityRoute: ActivityRoute,
+  DriveRoute: DriveRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
