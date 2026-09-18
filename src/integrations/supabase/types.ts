@@ -14,16 +14,215 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          bio: string | null
+          created_at: string
+          current_lat: number | null
+          current_lng: number | null
+          full_name: string
+          gcash_number: string | null
+          id: string
+          is_online: boolean
+          moto_model: string | null
+          phone: string | null
+          photo_url: string | null
+          plate_number: string | null
+          rating_avg: number
+          rating_count: number
+          trips_count: number
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          current_lat?: number | null
+          current_lng?: number | null
+          full_name?: string
+          gcash_number?: string | null
+          id: string
+          is_online?: boolean
+          moto_model?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          plate_number?: string | null
+          rating_avg?: number
+          rating_count?: number
+          trips_count?: number
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          current_lat?: number | null
+          current_lng?: number | null
+          full_name?: string
+          gcash_number?: string | null
+          id?: string
+          is_online?: boolean
+          moto_model?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          plate_number?: string | null
+          rating_avg?: number
+          rating_count?: number
+          trips_count?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      ratings: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          rater_id: string
+          ride_id: string
+          rider_id: string
+          stars: number
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rater_id: string
+          ride_id: string
+          rider_id: string
+          stars: number
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rater_id?: string
+          ride_id?: string
+          rider_id?: string
+          stars?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ratings_ride_id_fkey"
+            columns: ["ride_id"]
+            isOneToOne: true
+            referencedRelation: "rides"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rides: {
+        Row: {
+          accepted_at: string | null
+          completed_at: string | null
+          created_at: string
+          dropoff_label: string
+          dropoff_lat: number
+          dropoff_lng: number
+          errand_note: string | null
+          fare_cents: number
+          id: string
+          passenger_id: string
+          payment_method: Database["public"]["Enums"]["pay_method"]
+          payment_reference: string | null
+          payment_status: Database["public"]["Enums"]["pay_status"]
+          pickup_label: string
+          pickup_lat: number
+          pickup_lng: number
+          rider_id: string | null
+          scheduled_for: string | null
+          service: Database["public"]["Enums"]["ride_service"]
+          status: Database["public"]["Enums"]["ride_status"]
+        }
+        Insert: {
+          accepted_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          dropoff_label: string
+          dropoff_lat: number
+          dropoff_lng: number
+          errand_note?: string | null
+          fare_cents?: number
+          id?: string
+          passenger_id: string
+          payment_method?: Database["public"]["Enums"]["pay_method"]
+          payment_reference?: string | null
+          payment_status?: Database["public"]["Enums"]["pay_status"]
+          pickup_label: string
+          pickup_lat: number
+          pickup_lng: number
+          rider_id?: string | null
+          scheduled_for?: string | null
+          service?: Database["public"]["Enums"]["ride_service"]
+          status?: Database["public"]["Enums"]["ride_status"]
+        }
+        Update: {
+          accepted_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          dropoff_label?: string
+          dropoff_lat?: number
+          dropoff_lng?: number
+          errand_note?: string | null
+          fare_cents?: number
+          id?: string
+          passenger_id?: string
+          payment_method?: Database["public"]["Enums"]["pay_method"]
+          payment_reference?: string | null
+          payment_status?: Database["public"]["Enums"]["pay_status"]
+          pickup_label?: string
+          pickup_lat?: number
+          pickup_lng?: number
+          rider_id?: string | null
+          scheduled_for?: string | null
+          service?: Database["public"]["Enums"]["ride_service"]
+          status?: Database["public"]["Enums"]["ride_status"]
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "rider" | "passenger"
+      pay_method: "gcash" | "cash"
+      pay_status: "unpaid" | "paid"
+      ride_service: "moto" | "fetch" | "plus"
+      ride_status:
+        | "requested"
+        | "accepted"
+        | "ongoing"
+        | "completed"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +349,18 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "rider", "passenger"],
+      pay_method: ["gcash", "cash"],
+      pay_status: ["unpaid", "paid"],
+      ride_service: ["moto", "fetch", "plus"],
+      ride_status: [
+        "requested",
+        "accepted",
+        "ongoing",
+        "completed",
+        "cancelled",
+      ],
+    },
   },
 } as const
