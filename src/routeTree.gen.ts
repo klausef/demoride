@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ActivityRouteImport } from './routes/activity'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DriveRouteImport } from './routes/drive'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DriveRoute = DriveRouteImport.update({
   id: '/drive',
   path: '/drive',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activity': typeof ActivityRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
   '/drive': typeof DriveRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activity': typeof ActivityRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
   '/drive': typeof DriveRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/activity': typeof ActivityRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
   '/drive': typeof DriveRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/activity' | '/auth' | '/drive'
+  fullPaths: '/' | '/activity' | '/auth' | '/dashboard' | '/drive'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/activity' | '/auth' | '/drive'
-  id: '__root__' | '/' | '/activity' | '/auth' | '/drive'
+  to: '/' | '/activity' | '/auth' | '/dashboard' | '/drive'
+  id: '__root__' | '/' | '/activity' | '/auth' | '/dashboard' | '/drive'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActivityRoute: typeof ActivityRoute
   AuthRoute: typeof AuthRoute
+  DashboardRoute: typeof DashboardRoute
   DriveRoute: typeof DriveRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/drive': {
       id: '/drive'
       path: '/drive'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActivityRoute: ActivityRoute,
   AuthRoute: AuthRoute,
+  DashboardRoute: DashboardRoute,
   DriveRoute: DriveRoute,
 }
 export const routeTree = rootRouteImport
