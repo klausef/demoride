@@ -11,13 +11,13 @@ import { peso } from "@/lib/glide";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — Your Glide rides & earnings" },
+      { title: "Dashboard — Your FETCH rides & earnings" },
       {
         name: "description",
         content:
-          "See your upcoming Glide rides, track earnings, and rate your rider after each trip.",
+          "See your upcoming FETCH rides, track earnings, and rate your rider after each trip.",
       },
-      { property: "og:title", content: "Dashboard — Your Glide rides & earnings" },
+      { property: "og:title", content: "Dashboard — Your FETCH rides & earnings" },
       {
         property: "og:description",
         content: "Upcoming rides, earnings, and rider ratings in one place.",
@@ -38,7 +38,7 @@ type RideRow = {
   created_at: string;
   rider_id: string | null;
   passenger_id: string;
-  rider?: { full_name: string; photo_url: string | null; rating_avg: number } | null;
+  rider?: { full_name: string; photo_url: string | null; rating_avg: number; rating_count: number } | null;
 };
 
 function DashboardPage() {
@@ -56,7 +56,7 @@ function DashboardPage() {
       const col = role === "rider" ? "rider_id" : "passenger_id";
       const { data } = await supabase
         .from("rides")
-        .select("*, rider:profiles!rides_rider_id_fkey(full_name, photo_url, rating_avg)")
+        .select("*, rider:profiles!rides_rider_id_fkey(full_name, photo_url, rating_avg, rating_count)")
         .eq(col, user.id)
         .order("created_at", { ascending: false })
         .limit(30);
@@ -199,7 +199,7 @@ function DashboardPage() {
             {completed.map((r) => (
               <div key={r.id} className="glass-sheet rounded-xl p-3 ring-1 ring-white/15">
                 <div className="flex items-center gap-3">
-                  {r.rider && <Avatar name={r.rider.full_name} photo={r.rider.photo_url} />}
+                  {r.rider && <Avatar name={r.rider.full_name} url={r.rider.photo_url} />}
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-sm font-semibold text-foreground">
                       {r.rider?.full_name ?? "Ride"}
@@ -208,7 +208,7 @@ function DashboardPage() {
                       {r.dropoff_label} · {peso(r.fare_cents)}
                     </div>
                   </div>
-                  {r.rider && <Rating avg={r.rider.rating_avg} />}
+                  {r.rider && <Rating value={r.rider.rating_avg} count={r.rider.rating_count} />}
                 </div>
                 {role !== "rider" && r.rider_id && !ratedIds.has(r.id) && (
                   <button

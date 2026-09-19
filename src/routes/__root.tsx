@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Glide — Free motorcycle rides & fetch-anything errands" },
+      { title: "FETCH — Free motorcycle rides & fetch-anything errands" },
       {
         name: "description",
         content:
-          "Glide is a community ride hailing app: hop on a motorcycle ride or send a rider to fetch anything — free and convenient for riders and drivers.",
+          "FETCH is a community ride hailing app: hop on a motorcycle ride or send a rider to fetch anything — free and convenient for riders and drivers.",
       },
-      { name: "author", content: "Glide" },
-      { property: "og:title", content: "Glide — Free motorcycle rides & fetch-anything errands" },
+      { name: "author", content: "FETCH" },
+      { property: "og:title", content: "FETCH — Free motorcycle rides & fetch-anything errands" },
       {
         property: "og:description",
         content:

@@ -7,19 +7,19 @@ import { BottomNav } from "@/components/BottomNav";
 import { PersonRow } from "@/components/PersonCard";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, type Profile } from "@/lib/auth";
-import { MANILA, SERVICES, getPosition, peso, type ServiceId } from "@/lib/glide";
+import { BUKIDNON, SERVICES, getPosition, peso, type ServiceId } from "@/lib/glide";
 import { searchPlaces, reverseGeocode, type PlaceHit } from "@/lib/maps.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Glide — Motorcycle rides & pabili errands in Manila" },
+      { title: "FETCH — Motorcycle rides & pabili errands in Bukidnon" },
       {
         name: "description",
         content:
           "Book a motorcycle ride on a live map or send a rider to fetch anything. Pick your trusted rider, pay Moto Plus and errands with GCash.",
       },
-      { property: "og:title", content: "Glide — Motorcycle rides & pabili errands in Manila" },
+      { property: "og:title", content: "FETCH — Motorcycle rides & pabili errands in Bukidnon" },
       {
         property: "og:description",
         content:
@@ -38,7 +38,7 @@ function RideHome() {
   const search = useServerFn(searchPlaces);
   const rgeo = useServerFn(reverseGeocode);
 
-  const [me, setMe] = useState<LatLng>(MANILA);
+  const [me, setMe] = useState<LatLng>(BUKIDNON);
   const [pickup, setPickup] = useState<Point>(null);
   const [drop, setDrop] = useState<Point>(null);
   const [service, setService] = useState<ServiceId>("moto");
@@ -236,9 +236,14 @@ function RideHome() {
       />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent" />
 
-      <div className="absolute left-3 top-3 z-10 rounded-md bg-card/70 px-2.5 py-1.5 font-mono text-[10px] tracking-wide text-foreground/60 ring-1 ring-white/10">
-        <span className="mr-1.5 inline-block size-1.5 animate-pulse rounded-full bg-primary align-middle" />
-        LIVE {me.lat.toFixed(4)}°N {me.lng.toFixed(4)}°E
+      <div className="absolute left-3 top-3 z-10 space-y-1.5">
+        <div className="font-display text-lg font-bold leading-none tracking-[0.12em]">
+          FETCH<span className="text-primary">.</span>
+        </div>
+        <div className="inline-block rounded-md bg-card/70 px-2.5 py-1.5 font-mono text-[10px] tracking-wide text-foreground/60 ring-1 ring-white/10">
+          <span className="mr-1.5 inline-block size-1.5 animate-pulse rounded-full bg-primary align-middle" />
+          LIVE {me.lat.toFixed(4)}°N {me.lng.toFixed(4)}°E
+        </div>
       </div>
       <div className="absolute right-3 top-3 z-10 flex items-center gap-2">
         {user ? (

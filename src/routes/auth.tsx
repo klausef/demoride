@@ -8,16 +8,16 @@ import { useAuth } from "@/lib/auth";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — Glide motorcycle rides & errands" },
+      { title: "Sign in — FETCH motorcycle rides & errands" },
       {
         name: "description",
         content:
-          "Create your Glide account as a passenger or a motorcycle rider to book rides, run pabili errands and get paid through GCash.",
+          "Create your FETCH account as a passenger or a motorcycle rider to book rides, run pabili errands and get paid through GCash.",
       },
-      { property: "og:title", content: "Sign in — Glide motorcycle rides & errands" },
+      { property: "og:title", content: "Sign in — FETCH motorcycle rides & errands" },
       {
         property: "og:description",
-        content: "Join Glide as a passenger or motorcycle rider in Metro Manila.",
+        content: "Join FETCH as a passenger or motorcycle rider in Bukidnon.",
       },
     ],
   }),
@@ -82,13 +82,13 @@ function AuthPage() {
     <main className="min-h-dvh bg-background px-5 py-10 font-body text-foreground">
       <div className="mx-auto w-full max-w-sm">
         <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground">
-          Glide<span className="text-primary">.</span>
+          FETCH<span className="text-primary">.</span>
         </Link>
         <h1 className="mt-6 font-display text-2xl font-bold">
           {mode === "signup" ? "Create your account" : "Welcome back"}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Rides and pabili errands across Metro Manila.
+          Rides and pabili errands across Bukidnon.
         </p>
 
         {sent ? (
@@ -188,7 +188,7 @@ function AuthPage() {
             >
               {mode === "signup"
                 ? "Already have an account? Sign in"
-                : "New to Glide? Create an account"}
+                : "New to FETCH? Create an account"}
             </button>
           </>
         )}
