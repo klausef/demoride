@@ -64,7 +64,7 @@ export function PersonRow({
         selected ? "bg-primary/15 ring-1 ring-primary/40" : "bg-card/45 ring-1 ring-white/10"
       }`}
     >
-      <Avatar name={name} url={photo} />
+      <Avatar name={name} url={photo ?? null} />
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-semibold text-foreground">{name}</span>
         <span className="flex items-center gap-2">
