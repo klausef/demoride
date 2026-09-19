@@ -1,4 +1,4 @@
-export const MANILA = { lat: 14.5995, lng: 120.9842 };
+export const BUKIDNON = { lat: 8.1575, lng: 125.1278 };
 
 export type ServiceId = "moto" | "fetch" | "plus";
 
@@ -31,10 +31,10 @@ export function initials(name: string) {
 
 export function getPosition(): Promise<{ lat: number; lng: number }> {
   return new Promise((resolve) => {
-    if (typeof navigator === "undefined" || !navigator.geolocation) return resolve(MANILA);
+    if (typeof navigator === "undefined" || !navigator.geolocation) return resolve(BUKIDNON);
     navigator.geolocation.getCurrentPosition(
       (p) => resolve({ lat: p.coords.latitude, lng: p.coords.longitude }),
-      () => resolve(MANILA),
+      () => resolve(BUKIDNON),
       { enableHighAccuracy: true, timeout: 8000 },
     );
   });

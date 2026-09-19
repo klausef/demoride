@@ -11,13 +11,13 @@ import { peso } from "@/lib/glide";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — Your Glide rides & earnings" },
+      { title: "Dashboard — Your FETCH rides & earnings" },
       {
         name: "description",
         content:
-          "See your upcoming Glide rides, track earnings, and rate your rider after each trip.",
+          "See your upcoming FETCH rides, track earnings, and rate your rider after each trip.",
       },
-      { property: "og:title", content: "Dashboard — Your Glide rides & earnings" },
+      { property: "og:title", content: "Dashboard — Your FETCH rides & earnings" },
       {
         property: "og:description",
         content: "Upcoming rides, earnings, and rider ratings in one place.",

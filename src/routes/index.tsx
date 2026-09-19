@@ -7,19 +7,19 @@ import { BottomNav } from "@/components/BottomNav";
 import { PersonRow } from "@/components/PersonCard";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, type Profile } from "@/lib/auth";
-import { MANILA, SERVICES, getPosition, peso, type ServiceId } from "@/lib/glide";
+import { BUKIDNON, SERVICES, getPosition, peso, type ServiceId } from "@/lib/glide";
 import { searchPlaces, reverseGeocode, type PlaceHit } from "@/lib/maps.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Glide — Motorcycle rides & pabili errands in Manila" },
+      { title: "FETCH — Motorcycle rides & pabili errands in Bukidnon" },
       {
         name: "description",
         content:
           "Book a motorcycle ride on a live map or send a rider to fetch anything. Pick your trusted rider, pay Moto Plus and errands with GCash.",
       },
-      { property: "og:title", content: "Glide — Motorcycle rides & pabili errands in Manila" },
+      { property: "og:title", content: "FETCH — Motorcycle rides & pabili errands in Bukidnon" },
       {
         property: "og:description",
         content:
@@ -38,7 +38,7 @@ function RideHome() {
   const search = useServerFn(searchPlaces);
   const rgeo = useServerFn(reverseGeocode);
 
-  const [me, setMe] = useState<LatLng>(MANILA);
+  const [me, setMe] = useState<LatLng>(BUKIDNON);
   const [pickup, setPickup] = useState<Point>(null);
   const [drop, setDrop] = useState<Point>(null);
   const [service, setService] = useState<ServiceId>("moto");

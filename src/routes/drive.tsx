@@ -6,13 +6,13 @@ import { BottomNav } from "@/components/BottomNav";
 export const Route = createFileRoute("/drive")({
   head: () => ({
     meta: [
-      { title: "Drive — Take Glide rides & errands" },
+      { title: "Drive — Take FETCH rides & errands" },
       {
         name: "description",
         content:
           "Go online on your motorcycle, accept nearby ride and fetch requests, and keep every peso you earn. No commission.",
       },
-      { property: "og:title", content: "Drive — Take Glide rides & errands" },
+      { property: "og:title", content: "Drive — Take FETCH rides & errands" },
       {
         property: "og:description",
         content: "Go online, accept nearby rides and errands, and keep everything you earn.",

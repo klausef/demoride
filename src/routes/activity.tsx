@@ -5,15 +5,15 @@ import { BottomNav } from "@/components/BottomNav";
 export const Route = createFileRoute("/activity")({
   head: () => ({
     meta: [
-      { title: "Activity — Glide rides & errands" },
+      { title: "Activity — FETCH rides & errands" },
       {
         name: "description",
-        content: "Every Glide motorcycle ride and fetch errand you've taken, with what it cost you.",
+        content: "Every FETCH motorcycle ride and fetch errand you've taken, with what it cost you.",
       },
-      { property: "og:title", content: "Activity — Glide rides & errands" },
+      { property: "og:title", content: "Activity — FETCH rides & errands" },
       {
         property: "og:description",
-        content: "Every Glide motorcycle ride and fetch errand you've taken, with what it cost you.",
+        content: "Every FETCH motorcycle ride and fetch errand you've taken, with what it cost you.",
       },
     ],
   }),
