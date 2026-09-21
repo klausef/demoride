@@ -54,8 +54,14 @@ function AuthPage() {
         });
         if (error) throw error;
         if (!data.session) {
-          setSent(true);
-          toast.success("Almost there — confirm your email to finish signing up.");
+          const { error: signInError } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+          });
+          if (signInError) {
+            setSent(true);
+            toast.success("Almost there — confirm your email to finish signing up.");
+          }
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
